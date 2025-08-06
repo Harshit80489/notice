@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Community Notice Board</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f0f0f0;
+      color: #333;
+    }
+    .header {
+      background: #3e4f00;
+      color: white;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .logo {
+      width: 60px;
+    }
+    .nav-buttons {
+      background: #005066;
+      padding: 1rem;
+      text-align: center;
+    }
+    .nav-buttons button {
+      margin: 0.4rem;
+      padding: 0.7rem 1.2rem;
+      background: #00bcd4;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .nav-buttons button:hover {
+      background: #007c91;
+    }
+    .login-btn {
+      background-color: #ff5722 !important;
+    }
+    .logout-btn {
+      background-color: #607d8b !important;
+      display: none;
+    }
+    .content {
+      display: none;
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .active {
+      display: block;
+    }
+    .notice-form input,
+    .notice-form textarea,
+    .login-form input {
+      width: 100%;
+      margin: 0.5rem 0;
+      padding: 0.9rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    .notice-form button,
+    .login-form button {
+      background: #4caf50;
+      color: white;
+      padding: 0.7rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .notice-card {
+      background: #e0f7fa;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-left: 5px solid #0097a7;
+      border-radius: 6px;
+      position: relative;
+    }
+    .notice-card button.delete-btn {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 4px 8px;
+      cursor: pointer;
+      display: none;
+    }
+    .banner-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+    }
+    h2 {
+      font-weight: bold;
+      color: #333;
+      border-bottom: 2px solid #00bcd4;
+      padding-bottom: 0.5rem;
+    }
+    ul li {
+      padding: 0.4rem 0;
+    }
+    .home-highlights {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 1.5rem;
+    }
+    .home-highlights div {
+      text-align: center;
+    }
+    .home-highlights img {
+      width: 80px;
+    }
+    .footer {
+      background: #003b4f;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    .dashboard-stats {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .stat-box {
+      background: #e8f5e9;
+      padding: 1rem;
+      flex: 1;
+      min-width: 180px;
+      border-left: 5px solid #4caf50;
+      border-radius: 8px;
+    }
+    .popular-topic {
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <img src="https://img.icons8.com/external-flat-juicy-fish/60/000000/external-notice-notification-flat-flat-juicy-fish.png" class="logo" />
+    <h1>Community Notice Board</h1>
+    <p>Your one-stop destination for community events, news, offers & more!</p>
+  </header>
+
+  <nav class="nav-buttons">
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('announcements')">Announcements</button>
+    <button onclick="showSection('events')">Events</button>
+    <button onclick="showSection('buy')">Buy/Sell/Rent</button>
+    <button onclick="showSection('contacts')">Important Contacts</button>
+    <button onclick="showSection('dashboard')">Analytics</button>
+    <button onclick="showSection('login')" class="login-btn">Admin Login</button>
+    <button onclick="adminLogout()" class="logout-btn" id="logoutBtn">Logout</button>
+  </nav>
+
+  <!-- HOME SECTION -->
+  <section id="home" class="content active">
+    <img class="banner-img" src="https://images.unsplash.com/photo-1515169067865-5387ec356754?auto=format&fit=crop&w=1000&q=60" alt="Community">
+    <h2><strong>Welcome to the Community Notice Board</strong></h2>
+    <p>This platform is designed to bring the local community together. Here, you can:</p>
+    <ul>
+      <li>📢 Post or view important <strong>Announcements</strong></li>
+      <li>🗓️ Check upcoming <strong>Events</strong> happening near you</li>
+      <li>📦 Explore <strong>Buy, Sell, or Rent</strong> offers</li>
+      <li>🤝 Access essential <strong>Contacts</strong> for emergencies or support</li>
+    </ul>
+    <div class="home-highlights">
+      <div>
+        <img src="https://img.icons8.com/color/96/megaphone.png" />
+        <p><strong>Share News</strong></p>
+      </div>
+      <div>
+        <img src="https://img.icons8.com/color/96/calendar.png" />
+        <p><strong>Stay Informed</strong></p>
+      </div>
+      <div>
+        <img src="https://img.icons8.com/color/96/buy.png" />
+        <p><strong>Trade Locally</strong></p>
+      </div>
+    </div>
+  </section>
+    <!-- ANNOUNCEMENTS -->
+  <section id="announcements" class="content">
+    <h2>📢 Announcements</h2>
+    <div id="announcementPosts"></div>
+    <form class="notice-form" onsubmit="addPost(event, 'announcement')">
+      <input type="text" placeholder="Your Name" required />
+      <textarea placeholder="Write your announcement..." required></textarea>
+      <button type="submit">Post Announcement</button>
+    </form>
+  </section>
+
+  <!-- EVENTS -->
+  <section id="events" class="content">
+    <h2>🗓️ Events</h2>
+    <div id="eventPosts"></div>
+    <form class="notice-form" onsubmit="addPost(event, 'event')">
+      <input type="text" placeholder="Your Name" required />
+      <textarea placeholder="Describe the event..." required></textarea>
+      <button type="submit">Post Event</button>
+    </form>
+  </section>
+
+  <!-- BUY / SELL / RENT -->
+  <section id="buy" class="content">
+    <h2>🏠 Buy / Sell / Rent</h2>
+    <div id="buyPosts"></div>
+    <form class="notice-form" onsubmit="addPost(event, 'buy')">
+      <input type="text" placeholder="Your Name" required />
+      <textarea placeholder="Enter your offer or listing..." required></textarea>
+      <button type="submit">Post Offer</button>
+    </form>
+  </section>
+
+  <!-- IMPORTANT CONTACTS -->
+  <section id="contacts" class="content">
+    <h2>📞 Important Contacts</h2>
+    <ul>
+      <li>🚓 Police Station: 100</li>
+      <li>🚒 Fire Department: 101</li>
+      <li>🚑 Ambulance: 102</li>
+      <li>💧 Water Department: 1800-123-456</li>
+      <li>💡 Electricity Board: 1800-456-789</li>
+    </ul>
+  </section>
+
+  <!-- ANALYTICS DASHBOARD -->
+  <section id="dashboard" class="content">
+    <h2>📊 Analytics Dashboard</h2>
+    <div class="dashboard-stats">
+      <div class="stat-box" id="annCount">Announcements: 0</div>
+      <div class="stat-box" id="eventCount">Events: 0</div>
+      <div class="stat-box" id="buyCount">Buy/Sell/Rent: 0</div>
+      <div class="stat-box" id="dailyCount">Today's Posts: 0</div>
+    </div>
+    <div class="popular-topic" id="popularTopic">
+      <h3>🔥 Most Popular Topic:</h3>
+      <p id="popularKeyword">Loading...</p>
+    </div>
+  </section>
+
+  <!-- LOGIN SECTION -->
+  <section id="login" class="content">
+    <h2>🔐 Admin Login</h2>
+    <form class="login-form" onsubmit="login(event)">
+      <input type="text" placeholder="Username" id="username" required />
+      <input type="password" placeholder="Password" id="password" required />
+      <button type="submit">Login</button>
+    </form>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Community Notice Board. All rights reserved.</p>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const state = {
+      isAdmin: false,
+      posts: {
+        announcement: [
+          { name: 'Admin', text: 'Board meeting at 5PM today.' },
+          { name: 'Community Center', text: 'Free health checkup camp tomorrow.' }
+        ],
+        event: [
+          { name: 'Cultural Club', text: 'Diwali celebration on Nov 10th, 6PM.' }
+        ],
+        buy: [
+          { name: 'Ramesh', text: 'Selling 2BHK apartment near park. Contact 1234567890' }
+        ]
+      },
+      allKeywords: []
+    };
+
+    function showSection(id) {
+      document.querySelectorAll('.content').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      if (id === 'dashboard') updateAnalytics();
+    }
+
+    function renderPosts(type) {
+      const container = document.getElementById(type + 'Posts');
+      container.innerHTML = '';
+      state.posts[type].forEach((post, index) => {
+        const div = document.createElement('div');
+        div.className = 'notice-card';
+        div.innerHTML = `<strong>${post.name}</strong>: ${post.text}
+          <button class="delete-btn" onclick="deletePost('${type}', ${index})">🗑️</button>`;
+        if (state.isAdmin) div.querySelector('.delete-btn').style.display = 'inline';
+        container.appendChild(div);
+      });
+    }
+
+    function addPost(e, type) {
+      e.preventDefault();
+      const inputs = e.target.querySelectorAll('input, textarea');
+      const name = inputs[0].value;
+      const text = inputs[1].value;
+      state.posts[type].unshift({ name, text });
+      state.allKeywords.push(...text.toLowerCase().split(/\W+/));
+      renderPosts(type);
+      e.target.reset();
+    }
+
+    function deletePost(type, index) {
+      state.posts[type].splice(index, 1);
+      renderPosts(type);
+    }
+
+    function login(e) {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user === 'admin' && pass === 'admin123') {
+        state.isAdmin = true;
+        document.querySelectorAll('.delete-btn').forEach(btn => btn.style.display = 'inline');
+        document.getElementById('logoutBtn').style.display = 'inline-block';
+        showSection('dashboard');
+        alert('Admin logged in!');
+      } else {
+        alert('Invalid credentials!');
+      }
+    }
+
+    function adminLogout() {
+      state.isAdmin = false;
+      document.querySelectorAll('.delete-btn').forEach(btn => btn.style.display = 'none');
+      document.getElementById('logoutBtn').style.display = 'none';
+      showSection('home');
+    }
+
+    function updateAnalytics() {
+      document.getElementById('annCount').innerText = 'Announcements: ' + state.posts.announcement.length;
+      document.getElementById('eventCount').innerText = 'Events: ' + state.posts.event.length;
+      document.getElementById('buyCount').innerText = 'Buy/Sell/Rent: ' + state.posts.buy.length;
+      const todayPosts = [...state.posts.announcement, ...state.posts.event, ...state.posts.buy].length;
+      document.getElementById('dailyCount').innerText = "Today's Posts: " + todayPosts;
+
+      const freq = {};
+      state.allKeywords.forEach(k => {
+        if (k.length > 3) freq[k] = (freq[k] || 0) + 1;
+      });
+      let max = 0, topic = 'No data';
+      for (let k in freq) {
+        if (freq[k] > max) {
+          max = freq[k];
+          topic = k;
+        }
+      }
+      document.getElementById('popularKeyword').innerText = topic;
+    }
+
+    // Initial render
+    ['announcement', 'event', 'buy'].forEach(renderPosts);
+  </script>
+</body>
+</html>
+
